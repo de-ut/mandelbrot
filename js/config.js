@@ -1,8 +1,3 @@
-const canvasWidth = 800
-const canvasHeight = 600
-const canvasScaling = 1
-const ratio = canvasWidth / canvasHeight
-
 const initialSize = 2
 const sizeScale = 0.98
 
@@ -22,4 +17,26 @@ function colorFunc(i){
   return [...gradientFunction(mix), 255]
 }
 
-const colors = Array.from(Array(maxIterations)).map((_, i) => colorFunc(i))
+let colors
+
+function colorMode1(){
+  colors = Array.from(Array(maxIterations)).map((_, i) => colorFunc(i))
+}
+
+function colorMode2(){
+  colors = Array.from(Array(maxIterations)).map((_, i) => {
+    return i % 2 == (maxIterations - 1) % 2 ? [0, 0, 0, 255] : [255, 255, 255, 255]
+  })
+}
+
+function colorMode3(){
+  colors = Array.from(Array(maxIterations)).map((_, i) => {
+    if (i == maxIterations - 1){
+      return [0, 0, 0, 255]
+    }
+    return i % 2 == 0 ? [255, 0, 0, 255] : [0, 255, 0, 255]
+  })
+}
+
+colorMode1()
+
